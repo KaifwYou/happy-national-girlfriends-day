@@ -765,14 +765,25 @@ const playBtn = document.getElementById('playBtn');
 const disc = document.getElementById('disc');
 const eq = document.getElementById('eq');
 const bgMusic = document.getElementById('bgMusic');
+
 let playing = false;
-playBtn.addEventListener('click', ()=>{
+
+playBtn.addEventListener('click', () => {
+  alert("clicked");
+
   playing = !playing;
-  if(playing){ bgMusic.play(); } else { bgMusic.pause(); }
+
+  if (playing) {
+    bgMusic.play()
+      .then(() => alert("audio started"))
+      .catch(err => alert(err.message));
+  } else {
+    bgMusic.pause();
+  }
+
   disc.classList.toggle('playing', playing);
   eq.classList.toggle('paused', !playing);
   playBtn.textContent = playing ? '❚❚' : '▶';
-  playBtn.setAttribute('aria-label', playing ? 'Pause song' : 'Play song');
 });
 
 /* ---------------- Confetti hearts on click ---------------- */
